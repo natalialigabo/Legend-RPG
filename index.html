@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legend RPG: Saga Completa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=MedievalSharp&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="intro-game">
+        <div class="intro-content">
+            <h2 style="color:#fbc02d; font-family: 'Press Start 2P'">A LENDA</h2>
+            <p>O Mago Supremo controla tudo.<br>Atravesse os reinos para encontrar a verdade antiga.</p>
+            <button onclick="fecharIntro()">JOGAR</button>
+        </div>
+    </div>
+
+    <div id="story-modal" class="escondido">
+        <div class="story-content">
+            <h3 id="story-title">Capítulo Perdido</h3>
+            <p id="story-text">...</p>
+            <button onclick="fecharLivroHistoria()">FECHAR LIVRO</button>
+        </div>
+    </div>
+
+    <div id="tela-selecao" class="menu-container escondido">
+        <h1 class="titulo-game">LEGEND RPG</h1>
+        <input type="text" id="nomeHeroi" placeholder="Nome do Herói">
+        <div class="row">
+            <select id="classeHeroi">
+                <option value="mago">Mago</option>
+                <option value="guerreiro">Guerreiro</option>
+                <option value="ninja">Ninja</option>
+                <option value="elfo">Elfo</option>
+                <option value="anao">Anão</option>
+                <option value="paladino">Paladino</option>
+            </select>
+            <select id="elementoHeroi">
+                <option value="fogo">🔥 Fogo</option>
+                <option value="agua">💧 Água</option>
+                <option value="terra">🌿 Terra</option>
+                <option value="ar">🌪️ Ar</option>
+                <option value="luz">🌟 Luz</option>
+                <option value="trevas">🌑 Trevas</option  >
+            </select>
+        </div>
+        <button onclick="iniciarJogo()">CRIAR</button>
+    </div>
+
+    <div id="tela-batalha" class="escondido">
+        
+        <div class="top-interface">
+            <div class="status-bar">
+                <span>📍 <span id="nomeLocal">...</span></span>
+                <button class="btn-top-shop" onclick="toggleLoja()">🛒 LOJA</button>
+                <span>Lvl <span id="heroLevel">1</span> | 💰 <span id="goldDisplay">0</span></span>
+            </div>
+            <div class="mapa-container">
+                <div id="mapa-heroi" class="mapa-marcador"></div>
+            </div>
+        </div>
+
+        <div id="menu-loja" class="escondido">
+            <p style="color:orange">MERCADOR</p>
+            <button class="btn-shop" onclick="comprar('potion')">Poção (50g)</button>
+            <button class="btn-shop" onclick="comprar('upgrade')">Arma +10 (200g)</button>
+            <button class="btn-close" onclick="toggleLoja()">VOLTAR</button>
+            <button class="btn-shop" onclick="abrirLivroHistoria()">LIVRO DE HISTÓRIAS</button>
+            <button class="btn-shop" onclick="salvarProgresso()">SALVAR JOGO</button>
+            <button class="btn-shop" onclick="carregarProgresso()">CARREGAR JOGO</button>
+        </div>
+
+        <div class="battlefield">
+            
+            <div class="scenery-layer" id="scenery-container"></div>
+
+            <div class="character-container hero-side">
+                <div class="bars box-heroi">
+                    <h2 id="displayNome">Heroi</h2>
+                    <div class="hp-bar-container big-bar">
+                        <div id="hp-hero-fill" class="hp-fill blue" style="width:100%"></div>
+                        <p id="hp-hero-text" class="hp-text-overlay">500/500</p>
+                    </div>
+                </div>
+                <div id="hero-sprite" class="pixel-art"></div>
+            </div>
+
+            <div id="npc-sprite" class="pixel-art arvore-sabia escondido" onclick="interagirNPC()"></div>
+            <div id="bau-tesouro" class="pixel-art bau escondido" onclick="abrirBau()"></div>
+            <div id="saida-fase" class="escondido">SAÍDA</div>
+
+            <div class="character-container enemy-side">
+                <div class="bars box-inimigo">
+                    <h2 id="nomeMonstro">Inimigo</h2>
+                    <span id="xpRewardDisplay" class="xp-reward">XP: ??</span>
+                    <div class="hp-bar-container big-bar">
+                        <div id="hp-enemy-fill" class="hp-fill red" style="width:100%"></div>
+                        <p id="hp-enemy-text" class="hp-text-overlay">???/???</p>
+                    </div>
+                </div>
+                <div id="enemy-sprite" class="pixel-art orc"></div>
+            </div>
+        </div>
+
+        <div class="bottom-panel">
+            <div id="log-batalha" class="dialog-box"><p>...</p></div>
+            <div id="menu-batalha" class="actions">
+                <button class="btn-action atk" onclick="turno('atk')">⚔️ ATACAR</button>
+                <button class="btn-action skill" onclick="turno('skill')">✨ MAGIA</button>
+                <button class="btn-action item" onclick="usarPotion()">🧪 CURAR (<span id="qtdPotion">1</span>)</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
